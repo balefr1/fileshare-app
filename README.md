@@ -11,7 +11,7 @@ The Go application needs the following env vars:
 "DB_HOST" --> MySQL db host to connect our Go app to **  
 
 Front End (React.js) is under Client directory, before starting the Go app/creating container with Dockerfile,
-run npm run-script build  in order to generate React app static files.
+run *npm run-script build*  in order to generate React app static files.
 
 
 ---
