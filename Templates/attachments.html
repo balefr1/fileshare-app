@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title> Attachments Information </title>
+    <meta charset="UTF-8">
+    <script>
+       const urlParams = new URLSearchParams(window.location.search);
+       const username = urlParams.get('username');
+       const host = window.location.origin
+       
+      var baseurl = host+"/user-files/attachments/"+username;
+      function loadAttachments(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET",baseurl ,true);
+        xmlhttp.onreadystatechange = function() {
+          if(xmlhttp.readyState ===4 ){
+            if (xmlhttp.status !=200){
+              alert("Error "+xmlhttp.status+" - "+xmlhttp.responseText)
+            }
+            var persons = JSON.parse(xmlhttp.responseText);
+            var tbltop = `<table>
+			    <tr><th>Id</th><th>Filename</th><th>Date</th><th>Upload type</th></tr>`;
+            //main table content we fill from data from the rest call
+            var main ="";
+            if ( persons.length === 0 )
+            main+= "<td colspan=4><i>No attachments found for user "+username+"</i></td>"
+            for (i = 0; i < persons.length; i++){
+              main += "<tr><td>"+persons[i].id+"</td><td><a target='_blank' href='"+host+"/user-files/attachment/"+persons[i].id+"/get'>"+persons[i].file_name+"</a></td><td>"+persons[i].date+"</td><td>"+persons[i].upload_type+"</td></tr>";
+            }
+            var tblbottom = "</table>";
+            var tbl = tbltop + main + tblbottom;
+            document.getElementById("attachmentsinfo").innerHTML = tbl;
+          }
+        };
+        xmlhttp.send();
+      }
+      window.onload = function(){
+        loadAttachments();
+      }
+    </script>
+  </head>
+  <body>
+    <div id="attachmentsinfo"> </div>
+    <hr>
+    <form action="http://localhost:8080/upload/" enctype="multipart/form-data" method="POST"> 
+        <input type="file" name="file" accept="*" />
+        <button type="submit">submit </button>
+      </form>
+  </body>
+</html>
