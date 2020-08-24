@@ -1,6 +1,6 @@
-## Fileshare app to be deployed on ECS
+### Fileshare app to be deployed on ECS
 
-# Simple REST API in Go (Gin+GORM) with Reactjs Frontend.
+## Simple REST API in Go (Gin+GORM) with Reactjs Frontend.
 
 ### The Api allows to register/manage users, each user can upload files choosing whether to save them to S3 or on local filesystem.
 
