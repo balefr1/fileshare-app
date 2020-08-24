@@ -1,8 +1,8 @@
-Fileshare app to be deployed on ECS
+## Fileshare app to be deployed on ECS
 
-Simple REST API in Go (Gin+GORM) with Reactjs Frontend.
+# Simple REST API in Go (Gin+GORM) with Reactjs Frontend.
 
-The Api allows to register/manage users, each user can upload files choosing whether to save them to S3 or on local filesystem.
+### The Api allows to register/manage users, each user can upload files choosing whether to save them to S3 or on local filesystem.
 
 The Go application needs the following env vars:  
 "AWS_REGION"   --> the aws region  
@@ -10,7 +10,8 @@ The Go application needs the following env vars:
 "USER_FILE_PATH"  --> path on local fs where to save user uploads  
 "DB_HOST" --> MySQL db host to connect our Go app to **  
 
-
+Front End (React.js) is under Client directory, before starting the Go app/creating container with Dockerfile,
+run npm run-script build  in order to generate React app static files.
 
 
 ---
