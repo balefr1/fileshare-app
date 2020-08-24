@@ -48,9 +48,11 @@ func SetupRouter() *gin.Engine {
 	}
 
 	//r.LoadHTMLGlob("Templates/*")
-	// r.GET("/", func(c *gin.Context) {
-	// 	c.HTML(http.StatusOK, "index.html", gin.H{})
-	// })
+
+	//health-check path
+	r.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"status": "healthy"})
+	})
 	//r.POST("/upload", Controllers.Upload)
 	//r.StaticFS("/static", http.Dir("Pages/static"))
 
