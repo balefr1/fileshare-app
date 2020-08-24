@@ -10,7 +10,7 @@ The Go application needs the following env vars:
 "USER_FILE_PATH"  --> path on local fs where to save user uploads  
 "DB_HOST" --> MySQL db host to connect our Go app to **  
 
-Front End (React.js) is under Client directory, before starting the Go app/creating container with Dockerfile,
+Front End (React.js) is under Client directory, before starting the Go app/creating container with Dockerfile,  
 cd into Client dir and run *npm run-script build*  in order to generate React app static files.
 
 
