@@ -11,7 +11,7 @@ The Go application uses default port 8080 and needs the following env vars:
 "DB_HOST" --> MySQL db host to connect our Go app to ***  
 
 ---
-* Front End (React.js) is under Client directory,  
+*Front End (React.js) is under Client directory,  
 please note that build directory should not be committed, it's in this project so that it's ready to be run.
 In order to generate build dir (React app static files) cd into Client dir and run *npm run-script build* 
 
