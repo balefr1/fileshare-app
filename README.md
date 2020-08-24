@@ -12,8 +12,8 @@ The Go application uses default port 8080 and needs the following env vars:
 
 ---
 *Front End (React.js) is under Client directory,  
-please note that build directory should not be committed, it's in this project so that it's ready to be run.
-In order to generate build dir (React app static files) cd into Client dir and run *npm run-script build* 
+please note that build directory should not be committed, it's in this project just so that it's ready to be run.  
+In order to generate build dir (React app static files) cd into Client dir and run *npm run-script build*   
 
 **make sure the AWS role in use is granted s3:PutObject,s3:GetObject on all bucket objects,
 this application is meant to run on Docker containers with access to AWS (via ECS task role)
