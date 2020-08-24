@@ -36,7 +36,7 @@ func BuildDBConfig() *DBConfig {
 }
 func DbURL(dbConfig *DBConfig) string {
 	return fmt.Sprintf(
-		"%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=true&loc=Local",
+		"%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=true&loc=CET",
 		dbConfig.User,
 		dbConfig.Password,
 		dbConfig.Host,
