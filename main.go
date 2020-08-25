@@ -7,7 +7,7 @@ import (
 	"fileshare/Config"
 	"fileshare/Models"
 	"fileshare/Routes"
-
+	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 )
 
@@ -27,7 +27,7 @@ func main() {
 	// os.Setenv("S3_BUCKET", "fileshare-app-test")
 	// os.Setenv("S3_BUCKET", "fileshare-app-test")
 	// os.Setenv("USER_FILE_PATH", "/uploads")
-
+	gin.SetMode(gin.ReleaseMode)
 	r := Routes.SetupRouter()
 	//running
 	r.Run()
