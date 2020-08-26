@@ -11,8 +11,11 @@ import (
 
 //SetupRouter ... Configure routes
 func SetupRouter() *gin.Engine {
-	r := gin.Default()
-	r.Use(CORSMiddleware())
+	r := gin.New()
+	r.Use(CORSMiddleware(),
+		gin.LoggerWithWriter(gin.DefaultWriter, "/health"),
+		gin.Recovery(),
+	)
 
 	// --- STATIC CONTENT (REACT JS APP)(THESE SHOULD BE SERVED BY STANDALONE WEB SERVER NGINX APACHE (or even S3))
 	r.Use(static.Serve("/", static.LocalFile("./Client/build", true)))
