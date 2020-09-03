@@ -44,82 +44,6 @@ func GetAttachments(c *gin.Context) {
 	}
 }
 
-// //CreateAttachment creates an attachment
-// func CreateAttachment(c *gin.Context) {
-// 	username := c.Params.ByName("username")
-// 	var user Models.User
-// 	err := Models.GetUserByUsername(&user, username)
-// 	if err != nil {
-// 		if gorm.IsRecordNotFoundError(err) {
-// 			c.JSON(http.StatusBadRequest, gin.H{"error": "Username not found!"})
-// 		} else {
-// 			fmt.Println(err.Error())
-// 			c.AbortWithStatus(http.StatusInternalServerError)
-// 		}
-// 		return
-// 	}
-// 	place := c.Params.ByName("place")
-// 	var attachment Models.Attachment
-// 	//get file and save it to disk
-// 	file, header, err := c.Request.FormFile("file")
-// 	if err != nil {
-// 		c.String(http.StatusBadRequest, fmt.Sprintf("file err : %s", err.Error()))
-// 		return
-// 	}
-// 	filename := header.Filename
-// 	key := username + "/" + filename
-// 	diskpath := "public/" + key
-// 	out, err := createFile(diskpath)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	defer out.Close()
-// 	_, err = io.Copy(out, file)
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	//copy to s3 if required, then delete
-// 	if place == "s3" {
-// 		// Create a single AWS session (we can re use this if we're uploading many files)
-// 		s, err := session.NewSession(&aws.Config{Region: aws.String(os.Getenv("AWS_REGION"))})
-// 		if err != nil {
-// 			log.Fatal(err)
-// 			c.AbortWithStatus(http.StatusInternalServerError)
-// 			return
-// 		}
-// 		// Upload
-// 		err = AddFileToS3(s, diskpath, key)
-// 		if err != nil {
-// 			log.Fatal(err)
-// 			c.AbortWithStatus(http.StatusInternalServerError)
-// 			return
-// 		}
-
-// 		err2 := os.Remove(diskpath)
-
-// 		if err2 != nil {
-// 			fmt.Println(err2)
-// 			c.AbortWithStatus(http.StatusInternalServerError)
-// 			return
-// 		}
-// 	}
-
-// 	//filepath := "http://localhost:8080/file/" + filename
-// 	//c.JSON(http.StatusOK, gin.H{"filepath": filepath})
-
-// 	attachment.FileName = filename
-// 	attachment.UploadType = place
-// 	attachment.UserId = user.Id
-// 	attachment.Date = time.Now()
-// 	err3 := Models.CreateAttachment(&attachment)
-// 	if err3 != nil {
-// 		fmt.Println(err3.Error())
-// 		c.AbortWithStatus(http.StatusInternalServerError)
-
-// 	} else {
-// 		c.JSON(http.StatusOK, attachment)
-// 	}
-// }
 //CreateAttachment creates an attachment
 func CreateAttachment(c *gin.Context) {
 	username := c.Params.ByName("username")
@@ -155,18 +79,7 @@ func CreateAttachment(c *gin.Context) {
 			place = "s3"
 		}
 	}
-	// //check if element exists already with same upload type
-	// var att Models.Attachment
-	// err = Models.GetAttachmentByIDAndFileNameAndUploadType(&att, user.Id, filename, place)
-	// if err == nil {
-	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Duplicate filename with same upload type for this user!"})
-	// 	return
-	// } else {
-	// 	if !gorm.IsRecordNotFoundError(err) {
-	// 		fmt.Println(err.Error())
-	// 		c.AbortWithStatus(http.StatusInternalServerError)
-	// 	}
-	// }
+
 	out, err := createFile(diskpath)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -307,42 +220,6 @@ func DwAttachmentByID(c *gin.Context) {
 	}
 
 }
-
-// //GetUserByUsername ... Get the user by username
-// func GetUserByUsername(c *gin.Context) {
-// 	username := c.Params.ByName("username")
-// 	var user Models.User
-// 	err := Models.GetUserByUsername(&user, username)
-// 	if err != nil {
-// 		if gorm.IsRecordNotFoundError(err) {
-// 			c.AbortWithStatus(http.StatusNotFound)
-// 		} else {
-// 			fmt.Println(err.Error())
-// 			c.AbortWithStatus(http.StatusInternalServerError)
-// 		}
-
-// 	} else {
-// 		c.JSON(http.StatusOK, user)
-// 	}
-// }
-
-// //UpdateUser ... Update the user information
-// func UpdateUser(c *gin.Context) {
-// 	var user Models.User
-// 	id := c.Params.ByName("id")
-// 	err := Models.GetUserByID(&user, id)
-// 	if err != nil {
-// 		c.JSON(http.StatusNotFound, user)
-// 	}
-// 	c.BindJSON(&user)
-// 	err = Models.UpdateUser(&user, id)
-// 	if err != nil {
-// 		fmt.Println(err.Error())
-// 		c.AbortWithStatus(http.StatusInternalServerError)
-// 	} else {
-// 		c.JSON(http.StatusOK, user)
-// 	}
-// }
 
 //DeleteAttachment ... Delete the attachment
 func DeleteAttachment(c *gin.Context) {
