@@ -19,3 +19,8 @@ In order to generate build dir (React app static files) cd into Client dir and r
 this application is meant to run on Docker containers with access to AWS (via ECS task role)
 
 ***Db access config is located at Config/Database.go (ovverride db credentials here)
+
+----
+This is the infrastructure project (Terraform) 
+https://github.com/balefr1/fileshare-app-infrastructure
+
