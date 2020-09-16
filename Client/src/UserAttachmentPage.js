@@ -6,9 +6,17 @@ class UserAttachmentPage extends Component{
     state = {
         attachments: [],
         newAttachmentModal:false,
-
+        user:{},
       }
     componentWillMount() {
+      axios.get('/user-api/username/'+this.props.match.params.username).then((response)=>{
+        this.setState({
+          user:response.data
+        })
+      }).catch( (error) =>{
+          console.log(error.response)
+          alert("Error - " + error.response.data.error)
+        });
         axios.get('/user-files/attachments/'+this.props.match.params.username).then((response)=>{
           this.setState({
             attachments:response.data
@@ -83,6 +91,12 @@ class UserAttachmentPage extends Component{
           <Button color="primary" onClick={this.toggleNewAttachmentModal.bind(this)}>Upload file</Button>
           <a href='/'><Button color="secondary">Home</Button></a>
           <a href='/users'><Button color="secondary">Users</Button></a>
+          <br></br>
+          Hi,  <b>{this.state.user.name} {this.state.user.lastname}</b>
+          <br></br>
+          Username: {this.state.user.username}
+          <br></br>
+          Email: {this.state.user.email}
           <Modal isOpen={this.state.newAttachmentModal} toggle={this.toggleNewAttachmentModal.bind(this)}>
             <ModalHeader toggle={this.toggleNewAttachmentModal.bind(this)}>Upload new file</ModalHeader>
             <ModalBody>
