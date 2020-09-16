@@ -48,7 +48,7 @@ func GetAttachmentByID(attachment *Attachment, id string) (err error) {
 //
 
 func UpdateAttachmentDateByFileNameAndUploadTypeOrCreate(attachment *Attachment) (err error) {
-	if err = Config.DB.Where(Attachment{FileName: attachment.FileName, UploadType: attachment.UploadType}).Assign(Attachment{Date: time.Now()}).FirstOrCreate(attachment).Error; err != nil {
+	if err = Config.DB.Where(Attachment{FileName: attachment.FileName, UploadType: attachment.UploadType, UserId: attachment.UserId}).Assign(Attachment{Date: time.Now()}).FirstOrCreate(attachment).Error; err != nil {
 		return err
 	}
 	return nil
