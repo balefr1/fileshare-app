@@ -24,3 +24,7 @@ this application is meant to run on Docker containers with access to AWS (via EC
 This is the infrastructure project (Terraform) 
 https://github.com/balefr1/fileshare-app-infrastructure
 
+---
+
+Maintainer: Sereno Balestra (sbalestra@sorint.it)
+
