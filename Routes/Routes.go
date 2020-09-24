@@ -19,6 +19,7 @@ func SetupRouter() *gin.Engine {
 
 	// --- STATIC CONTENT (REACT JS APP)(THESE SHOULD BE SERVED BY STANDALONE WEB SERVER NGINX APACHE (or even S3))
 	r.Use(static.Serve("/", static.LocalFile("./Client/build", true)))
+	r.StaticFile("/favicon.ico", "Client/public/favicon.ico")
 	r.LoadHTMLGlob("Client/build/index.html")
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", nil)

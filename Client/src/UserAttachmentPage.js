@@ -47,7 +47,7 @@ class UserAttachmentPage extends Component{
         var imagefile = document.querySelector('#file');
         formData.append("file", imagefile.files[0]);
         var is_s3 = ""
-        if (upload_type != "") {
+        if (upload_type !== "") {
             is_s3="/"+upload_type
         }
         axios.post('/user-files/attachment/'+this.props.match.params.username+is_s3,formData,{
